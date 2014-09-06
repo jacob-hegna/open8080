@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
 
     unsigned char *hexdump = malloc(fsize);
     fread(hexdump, fsize, 1, file);
+    fclose(file);
 
     int pc = 0;
     while(pc < fsize) {
@@ -37,7 +38,6 @@ int main(int argc, char *argv[]) {
     }
 
     free(hexdump);
-    fclose(file);
     exit(0);
 }
 
@@ -50,14 +50,28 @@ int main(int argc, char *argv[]) {
 #define GET_OPT(a, b, name, ...) name
 #define OPT(...) GET_OPT(__VA_ARGS__, OPT_2, OPT_1)(__VA_ARGS__)
 inline int format_optcode(unsigned char *buffer, int pc, char s[], int size) {
+    switch(size) {
+        case 1:
+            printf(" %02x        ", buffer[pc]);
+            break;
+        case 2:
+            printf(" %02x %02x     ", buffer[pc], buffer[pc+1]);
+            break;
+        case 3:
+            printf(" %02x %02x %02x  ", buffer[pc], buffer[pc+1], buffer[pc+2]);
+            break;
+    }
+
     printf(s, (size >= 2) ? (
         (size == 2) ? buffer[pc+1] : buffer[pc+2]
-    ) : (unsigned char)"", (size == 3) ? buffer[pc+1] : (unsigned char)"");
+    ) : 0, (size == 3) ? buffer[pc+1] : 0);
     return size;
 }
 
 int opcode(unsigned char *buffer, int pc) {
     int bytes = 1;
+
+    printf("%04x  ", pc);
 
     switch(buffer[pc]) {
         // How 'bout them optcodes
