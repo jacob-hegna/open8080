@@ -69,7 +69,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x05: OPT("DCR B");                    break;
         case 0x06: OPT("MVI B, #$%02x", 2);         break;
         case 0x07: OPT("RLC");                      break;
-        case 0x08:                                  break;
+        case 0x08: OPT("NOP");                      break;
         case 0x09: OPT("DAD B");                    break;
         case 0x0a: OPT("LDAX B");                   break;
         case 0x0b: OPT("DCX B");                    break;
@@ -77,7 +77,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x0d: OPT("DCR C");                    break;
         case 0x0e: OPT("MVI C, #$%02x%02x", 3);     break;
         case 0x0f: OPT("RRC");                      break;
-        case 0x10:                                  break;
+        case 0x10: OPT("NOP");                      break;
         case 0x11: OPT("LXI D, #$%02x%02x", 3);     break;
         case 0x12: OPT("STAX D");                   break;
         case 0x13: OPT("INX D");                    break;
@@ -85,7 +85,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x15: OPT("DCR D");                    break;
         case 0x16: OPT("MVI D, #$%02x", 2);         break;
         case 0x17: OPT("RAL");                      break;
-        case 0x18:                                  break;
+        case 0x18: OPT("NOP");                      break;
         case 0x19: OPT("DAD D");                    break;
         case 0x1a: OPT("LDAX E");                   break;
         case 0x1b: OPT("DCX D");                    break;
@@ -101,7 +101,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x25: OPT("DCR H");                    break;
         case 0x26: OPT("MVI H, #$%02x", 2);         break;
         case 0x27: OPT("DAA");                      break;
-        case 0x28:                                  break;
+        case 0x28: OPT("NOP");                      break;
         case 0x29: OPT("DAD H");                    break;
         case 0x2a: OPT("LHLD #$%02x%02x", 3);       break;
         case 0x2b: OPT("DCX H");                    break;
@@ -117,7 +117,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x35: OPT("DCR M");                    break;
         case 0x36: OPT("MVI M, #$%02x", 2);         break;
         case 0x37: OPT("STC");                      break;
-        case 0x38:                                  break;
+        case 0x38: OPT("NOP");                      break;
         case 0x39: OPT("DAD SP");                   break;
         case 0x3a: OPT("LDA #$%02x%02x", 3);        break;
         case 0x3b: OPT("DCX SP");                   break;
@@ -262,7 +262,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0xc8: OPT("RZ");                       break;
         case 0xc9: OPT("RET");                      break;
         case 0xca: OPT("JZ #$%02x%02x", 3);         break;
-        case 0xcb:                                  break;
+        case 0xcb: OPT("NOP");                      break;
         case 0xcc: OPT("JZ #$%02x%02x", 3);         break;
         case 0xcd: OPT("CALL #$%02x%02x", 3);       break;
         case 0xce: OPT("ACI #$%02x", 2);            break;
@@ -276,11 +276,11 @@ int opcode(unsigned char *buffer, int pc) {
         case 0xd6: OPT("SUI #$%02x", 2);            break;
         case 0xd7: OPT("RST 2");                    break;
         case 0xd8: OPT("RC");                       break;
-        case 0xd9:                                  break;
+        case 0xd9: OPT("NOP");                      break;
         case 0xda: OPT("JC #$%02x%02x", 3);         break;
         case 0xdb: OPT("IN #$%02x", 2);             break;
         case 0xdc: OPT("CC #$%02x%02x", 3);         break;
-        case 0xdd:                                  break;
+        case 0xdd: OPT("NOP");                      break;
         case 0xde: OPT("SBI #$%02x", 2);            break;
         case 0xdf: OPT("RST 3");                    break;
         case 0xe0: OPT("RPO");                      break;
@@ -296,7 +296,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0xea: OPT("JPE #$%02x%02x", 3);        break;
         case 0xeb: OPT("XCHG");                     break;
         case 0xec: OPT("CPE #$%02x%02x", 3);        break;
-        case 0xed:                                  break;
+        case 0xed: OPT("NOP");                      break;
         case 0xee: OPT("XRI #$%02x", 2);            break;
         case 0xef: OPT("RST 5");                    break;
         case 0xf0: OPT("RP");                       break;
@@ -312,11 +312,11 @@ int opcode(unsigned char *buffer, int pc) {
         case 0xfa: OPT("JM #$%02x%02x", 3);         break;
         case 0xfb: OPT("EI");                       break;
         case 0xfc: OPT("CM #$%02x%02x", 3);         break;
-        case 0xfd:                                  break;
+        case 0xfd: OPT("NOP");                      break;
         case 0xfe: OPT("CPI #$%02x", 2);            break;
         case 0xff: OPT("RST 7");                    break;
     }
 
-    OPT("\n");
+    printf("\n");
     return bytes;
 }
