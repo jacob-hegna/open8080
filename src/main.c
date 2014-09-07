@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
     while((c = getopt(argc, argv, "a:d:e:h")) != -1) {
         switch(c) {
             case 'a':
+                assemble(optarg);
                 break;
             case 'd':
                 disassemble(optarg);
@@ -36,6 +37,13 @@ int main(int argc, char *argv[]) {
                 printf(" -h   print this message\n");
                 break;
             default:
+                /*
+                 * try {
+                 * ...
+                 * } catch(e) {
+                 *  "Error handling"
+                 * }
+                 */
                 break;
         }
     }

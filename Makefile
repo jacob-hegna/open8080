@@ -14,7 +14,7 @@ CC          = gcc
 LINKER      = $(CC)
 ARCH        = 64
 
-CCFLAGS     = -c -g -w -O3 -m$(ARCH)
+CCFLAGS     = -c -g -w -O3 -m$(ARCH) -std=c99
 LINKFLAGS   = -m$(ARCH)
 
 

@@ -1,4 +1,5 @@
 ./bin/*
 *.bin
 *.txt
+*.S
 .DS_Store
