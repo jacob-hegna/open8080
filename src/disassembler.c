@@ -13,15 +13,11 @@
 int opcode(unsigned char *buffer, int pc);
 inline int format_optcode(unsigned char *buffer, int pc, char s[], int size);
 
-int main(int argc, char *argv[]) {
-    if(argc < 2) {
-        printf("Usage: %s [binary file]\n", argv[0]);
-        exit(1);
-    }
-    FILE *file = fopen(argv[1], "rb");
+int disassemble(char *filename) {
+    FILE *file = fopen(filename, "rb");
     if(file == NULL) {
-        printf("Error: cannot open '%s'\n", argv[1]);
-        exit(1);
+        printf("Error: cannot open '%s'\n", filename);
+        return -1;
     }
 
     fseek(file, 0L, SEEK_END);
@@ -38,7 +34,7 @@ int main(int argc, char *argv[]) {
     }
 
     free(hexdump);
-    exit(0);
+    return 0;
 }
 
 /*
