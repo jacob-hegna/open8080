@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "disassembler.h"
+
 typedef struct {
     uint8_t z   : 1;
     uint8_t s   : 1;
@@ -99,6 +101,11 @@ void dump_state(State *state) {
         state->cc.s, state->cc.z, state->cc.p, state->cc.cy, state->cc.ac);
 }
 
+void unimplemented_opcode(State *state) {
+    printf("ERROR: unimplemented instruction: ");
+    opcode(state->memory, state->pc);
+}
+
 void emulate_opcode(State *state) {
     unsigned char *opcode = &state->memory[state->pc];
     uint16_t answer = 0;
@@ -108,11 +115,6 @@ void emulate_opcode(State *state) {
             state->c = opcode[1];
             state->b = opcode[2];
             state->pc += 2;
-            break;
-
-        case 0x06: // MVI B
-            state->b = opcode[1];
-            ++state->pc;
             break;
 
         case 0x80: // ADD B
@@ -132,9 +134,37 @@ void emulate_opcode(State *state) {
             state->a = answer & 0xff;
             break;
 
-        case 0x3e: // MVI A
+        case 0x3e: // MVI A, d8
             state->a = opcode[1];
             ++state->pc;
+            break;
+        case 0x06: // MVI B, d8
+            state->b = opcode[1];
+            ++state->pc;
+            break;
+        case 0x0e: // MVI C, d8
+            state->c = opcode[1];
+            ++state->pc;
+            break;
+        case 0x16: // MVI D, d8
+            state->d = opcode[1];
+            ++state->pc;
+            break;
+        case 0x1e: // MVI E, d8
+            state->e = opcode[1];
+            ++state->pc;
+            break;
+        case 0x26: // MVI H, d8
+            state->h = opcode[1];
+            ++state->pc;
+            break;
+        case 0x2e: // MVI L, d8
+            state->l = opcode[1];
+            ++state->pc;
+            break;
+
+        default:
+            unimplemented_opcode(state);
             break;
     }
     ++state->pc;

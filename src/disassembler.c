@@ -85,7 +85,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x0b: OPT("DCX B");                    break;
         case 0x0c: OPT("INR C");                    break;
         case 0x0d: OPT("DCR C");                    break;
-        case 0x0e: OPT("MVI C, #$%02x%02x", 3);     break;
+        case 0x0e: OPT("MVI C, #$%02x", 2);         break;
         case 0x0f: OPT("RRC");                      break;
         case 0x10: OPT("NOP");                      break;
         case 0x11: OPT("LXI D, #$%02x%02x", 3);     break;
@@ -101,7 +101,7 @@ int opcode(unsigned char *buffer, int pc) {
         case 0x1b: OPT("DCX D");                    break;
         case 0x1c: OPT("INR E");                    break;
         case 0x1d: OPT("DCR E");                    break;
-        case 0x1e: OPT("MVI E, #$%02x%02x", 3);     break;
+        case 0x1e: OPT("MVI E, #$%02x", 2);     break;
         case 0x1f: OPT("RAR");                      break;
         case 0x20: OPT("RIM");                      break;
         case 0x21: OPT("LXI H, #$%02x%02x", 3);     break;

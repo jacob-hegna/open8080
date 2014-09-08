@@ -32,4 +32,3 @@ $(BUILDDIR)%.c.o: %.c
 .PHONY: clean
 clean:
 	rm $(BUILDDIR)*
-	rm $(TARGET)

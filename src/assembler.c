@@ -42,6 +42,20 @@ int assemble(char *filename) {
     return 0;
 }
 
+void mvi(char *reg, char *word, FILE *file) {
+    unsigned char buffer[] = {0, 0};
+    if(strcmp(reg, "A") == 0) buffer[0] = 0x3e;
+    else if(strcmp(reg, "B") == 0) buffer[0] = 0x06;
+    else if(strcmp(reg, "C") == 0) buffer[0] = 0x0e;
+    else if(strcmp(reg, "D") == 0) buffer[0] = 0x16;
+    else if(strcmp(reg, "E") == 0) buffer[0] = 0x1e;
+    else if(strcmp(reg, "H") == 0) buffer[0] = 0x26;
+    else if(strcmp(reg, "L") == 0) buffer[0] = 0x2e;
+    else if(strcmp(reg, "M") == 0) buffer[0] = 0x36;
+    sscanf(word, "%02x", &buffer[1]);
+    fwrite(buffer, sizeof(buffer), 1, file);
+}
+
 void assemble_line(FILE *file, char *line) {
     char *buffer = strtok(line, ", ");
     char *inst[3] = {NULL, NULL, NULL};
@@ -51,15 +65,7 @@ void assemble_line(FILE *file, char *line) {
         buffer = strtok(NULL, ", ");
     }
     if(strcmp(inst[0], "MVI") == 0) {
-        unsigned char buffer[] = {0, 0};
-        if(strcmp(inst[1], "A") == 0) {
-            buffer[0] = 0x3e;
-            sscanf(inst[2], "%02x", &buffer[1]);
-        } else if(strcmp(inst[1], "B") == 0) {
-            buffer[0] = 0x06;
-            sscanf(inst[2], "%02x", &buffer[1]);
-        }
-        fwrite(buffer, sizeof(buffer), 1, file);
+        mvi(inst[1], inst[2], file);
     } else if(strcmp(inst[0], "ADD") == 0) {
         unsigned char buffer[] = {0};
         if(strcmp(inst[1], "B") == 0) {
@@ -67,4 +73,5 @@ void assemble_line(FILE *file, char *line) {
         }
         fwrite(buffer, sizeof(buffer), 1, file);
     }
+    free(buffer);
 }
