@@ -2,7 +2,6 @@
  * Shoutout to www.emulator101.com for a solid tutorial on the 8080,
  * you have pretty big domain-handling bugs, but you know your schtuff
  */
-
 #include <stdlib.h>
 #include <stdio.h>
 
