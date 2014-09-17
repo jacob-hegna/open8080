@@ -3,6 +3,10 @@ SOURCEDIR   = ./src/
 
 DEFINES     =
 
+PREFIX      = /usr/local
+INSTDIR     = $(PREFIX)
+INSTBIN     = $(INSTDIR)/bin
+
 SDIRS       = $(wildcard $(SOURCEDIR)*/)
 VPATH       = $(SOURCEDIR):$(SDIRS):$(foreach dir, $(SDIRS), $(wildcard $(dir)*/))
 
@@ -28,6 +32,14 @@ $(TARGET): $(foreach file, $(OFILES), $(BUILDDIR)$(file))
 $(BUILDDIR)%.c.o: %.c
 	$(CC) $(foreach def, $(DEFINES), -D $(def)) $(CCFLAGS) $< -o $@
 
+install:
+	test -d $(INSTDIR) || mkdir -p $(INSTDIR)
+	test -d $(INSTBIN) || mkdir -p $(INSTBIN)
+
+	install -m 0755 $(BUILDDIR)$(TARGET) $(INSTBIN)
+
+remove:
+	rm $(INSTBIN)/$(TARGET)
 
 .PHONY: clean
 clean:
