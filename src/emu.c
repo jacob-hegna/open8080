@@ -6,10 +6,7 @@
 #include "opcodes_emu.h"
 #include "state.h"
 
-void init_state(State *state);
 void emulate_opcode(State *state);
-uint8_t parity(uint16_t p);
-void dump_state(State *state);
 
 int emulate(char *filename) {
     State state;
@@ -46,7 +43,6 @@ void unimplemented_opcode(State *state) {
     opcode(state->memory, state->pc);
 }
 
-#define OPT_EMU(opt, reg) opt(state, &state->reg)
 void emulate_opcode(State *state) {
     unsigned char *opcode = &state->memory[state->pc];
     switch(*opcode) {
