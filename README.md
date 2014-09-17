@@ -10,7 +10,9 @@ make
 make install
 ```
 
-It will install to /usr/local/bin/open8080
+It will install to `/usr/local/bin/open8080`.
+
+To remove `open8080`, simply run `make remove`.
 
 ## Copyright and License
 open8080 is Copyright 2014 Jacob Hegna.
