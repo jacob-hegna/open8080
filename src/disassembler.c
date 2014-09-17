@@ -41,11 +41,11 @@ int disassemble(char *filename) {
  * This macro/function combination may not be the prettiest, but it makes my
  * life a whole lot easier when defining optcodes #sorrynotsorry
  */
-#define OPT_1(a) (bytes = format_optcode(buffer, pc, a, 1))
-#define OPT_2(a, b) (bytes = format_optcode(buffer, pc, a, b))
+#define OPT_1(a) (bytes = format_opcode(buffer, pc, a, 1))
+#define OPT_2(a, b) (bytes = format_opcode(buffer, pc, a, b))
 #define GET_OPT(a, b, name, ...) name
 #define OPT(...) GET_OPT(__VA_ARGS__, OPT_2, OPT_1)(__VA_ARGS__)
-inline int format_optcode(unsigned char *buffer, int pc, char s[], int size) {
+inline int format_opcode(unsigned char *buffer, int pc, char s[], int size) {
     switch(size) {
         case 1:
             printf(" %02x        ", buffer[pc]);
