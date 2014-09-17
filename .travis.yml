@@ -1,5 +1,6 @@
 language: c
 
+before_script: mkdir ./bin/
 script: make
 
 notifications:
