@@ -4,7 +4,7 @@ open8080 is a full-service Intel 8080 emulation suite.  It includes an 8080 asse
 
 ## Installing
 ```
-git clone https://github.com/jacob-hegna/basicpp.git
+git clone https://github.com/jacob-hegna/open8080.git
 cd open8080
 make
 make install

@@ -24,7 +24,12 @@ LINKFLAGS   = -m$(ARCH)
 
 TARGET = open8080
 
-all: $(TARGET)
+.PHONY: all install remove clean
+
+all: $(BUILDDIR) $(TARGET)
+
+$(BUILDDIR):
+	test -d $@ || mkdir -p $@
 
 $(TARGET): $(foreach file, $(OFILES), $(BUILDDIR)$(file))
 	$(LINKER) $^ $(LINKFLAGS) -o $(BUILDDIR)$@
@@ -41,6 +46,5 @@ install:
 remove:
 	rm $(INSTBIN)/$(TARGET)
 
-.PHONY: clean
 clean:
 	rm $(BUILDDIR)*
