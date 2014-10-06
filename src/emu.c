@@ -5,6 +5,7 @@
 #include "disassembler.h"
 #include "opcodes_emu.h"
 #include "state.h"
+#include "opcodes.h"
 
 void emulate_opcode(State *state);
 
@@ -46,147 +47,147 @@ void unimplemented_opcode(State *state) {
 void emulate_opcode(State *state) {
     unsigned char *opcode = &state->memory[state->pc];
     switch(*opcode) {
-        case 0x00: break;
-        case 0x01: // LXI B, word
+        case NOP: break;
+        case LXI_B:
             state->c = opcode[1];
             state->b = opcode[2];
             state->pc += 2;
             break;
 
-        case 0x05: // DCR B
+        case DCR_B:
             dcr_emu(state, &state->b);
             break;
-        case 0x0d: // DCR C
+        case DCR_C:
             dcr_emu(state, &state->c);
             break;
-        case 0x15: // DCR D
+        case DCR_D:
             dcr_emu(state, &state->d);
             break;
-        case 0x1d: // DCR E
+        case DCR_E:
             dcr_emu(state, &state->e);
             break;
-        case 0x25: // DCR H
+        case DCR_H:
             dcr_emu(state, &state->h);
             break;
-        case 0x2d: // DCR L
+        case DCR_L:
             dcr_emu(state, &state->l);
             break;
-        case 0x3d: // DCR A
+        case DCR_A:
             dcr_emu(state, &state->a);
             break;
 
-        case 0x04: // INR B
+        case INR_B:
             inr_emu(state, &state->b);
             break;
-        case 0x0c: // INR C
+        case INR_C:
             inr_emu(state, &state->c);
             break;
-        case 0x14: // INR D
+        case INR_D:
             inr_emu(state, &state->d);
             break;
-        case 0x1c: // INR E
+        case INR_E:
             inr_emu(state, &state->e);
             break;
-        case 0x24: // INR H
+        case INR_H:
             inr_emu(state, &state->h);
             break;
-        case 0x2c: // INR L
+        case INR_L:
             inr_emu(state, &state->l);
             break;
-        case 0x3c: // INR A
+        case INR_A:
             inr_emu(state, &state->a);
             break;
 
-        case 0x80: // ADD B
+        case ADD_B:
             add_emu(state, &state->b);
             break;
-        case 0x81: // ADD C
+        case ADD_C:
             add_emu(state, &state->c);
             break;
-        case 0x82: // ADD D
+        case ADD_D:
             add_emu(state, &state->d);
             break;
-        case 0x83: // ADD E
+        case ADD_E:
             add_emu(state, &state->e);
             break;
-        case 0x84: // ADD H
+        case ADD_H:
             add_emu(state, &state->h);
             break;
-        case 0x85: // ADD L
+        case ADD_L:
             add_emu(state, &state->l);
             break;
-        case 0x87: // ADD A
+        case ADD_A:
             add_emu(state, &state->a);
             break;
 
-        case 0x90: // SUB B
+        case SUB_B:
             sub_emu(state, &state->b);
             break;
-        case 0x91: // SUB C
+        case SUB_C:
             sub_emu(state, &state->c);
             break;
-        case 0x92: // SUB D
+        case SUB_D:
             sub_emu(state, &state->d);
             break;
-        case 0x93: // SUB E
+        case SUB_E:
             sub_emu(state, &state->e);
             break;
-        case 0x94: // SUB H
+        case SUB_H:
             sub_emu(state, &state->h);
             break;
-        case 0x95: // SUB L
+        case SUB_L:
             sub_emu(state, &state->l);
             break;
-        case 0x97: // SUB A
+        case SUB_A:
             sub_emu(state, &state->a);
             break;
 
-        case 0xa0: // ANA B
+        case ANA_B:
             ana_emu(state, &state->b);
             break;
-        case 0xa1: // ANA C
+        case ANA_C:
             ana_emu(state, &state->c);
             break;
-        case 0xa2: // ANA D
+        case ANA_D:
             ana_emu(state, &state->d);
             break;
-        case 0xa3: // ANA E
+        case ANA_E:
             ana_emu(state, &state->e);
             break;
-        case 0xa4: // ANA H
+        case ANA_H:
             ana_emu(state, &state->h);
             break;
-        case 0xa5: // ANA L
+        case ANA_L:
             ana_emu(state, &state->l);
             break;
-        case 0xa7: // ANA A
+        case ANA_A:
             ana_emu(state, &state->a);
 
-        case 0x3e: // MVI A, d8
+        case MVI_A:
             state->a = opcode[1];
             ++state->pc;
             break;
-        case 0x06: // MVI B, d8
+        case MVI_B:
             state->b = opcode[1];
             ++state->pc;
             break;
-        case 0x0e: // MVI C, d8
+        case MVI_C:
             state->c = opcode[1];
             ++state->pc;
             break;
-        case 0x16: // MVI D, d8
+        case MVI_D:
             state->d = opcode[1];
             ++state->pc;
             break;
-        case 0x1e: // MVI E, d8
+        case MVI_E:
             state->e = opcode[1];
             ++state->pc;
             break;
-        case 0x26: // MVI H, d8
+        case MVI_H:
             state->h = opcode[1];
             ++state->pc;
             break;
-        case 0x2e: // MVI L, d8
+        case MVI_L:
             state->l = opcode[1];
             ++state->pc;
             break;
